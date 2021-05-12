@@ -10,12 +10,14 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<h1>Covid Hospitals List</h1>
 <table>
     <tr>
-        <th>
-            <h1>Covid Hospitals List</h1>
-        </th>
-        
+        <th>Hospital Name</th>
+        <th>City</th>
+        <th>Start Data</th>
+        <th>Open for Online Registrations</th>
+        <th>No of Beds</th>
     </tr>
     @foreach (var item in Model)
     {

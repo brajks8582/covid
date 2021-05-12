@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace CovidHospitalsMgmt.Controllers
 {
-    [CustomExceptionFilterAttribute]
+    [CustomExceptionFilter]
     public class CovidHospitalsController : Controller
     {
         public CovidHospitalDBContext ctx = new CovidHospitalDBContext();
@@ -22,11 +22,14 @@ namespace CovidHospitalsMgmt.Controllers
         [HttpGet]
         public ActionResult AddCovidHospital()
         {
-            return View();
+            CovidHospital ch = new CovidHospital();
+            ch.Beds = 0;
+            return View(ch);
         }
         [HttpPost]
         public ActionResult AddCovidHospital(CovidHospital covidHospital)
         {
+            var ctx =new  CovidHospitalDBContext();
             try
             {
                 if (ModelState.IsValid)
@@ -49,6 +52,7 @@ namespace CovidHospitalsMgmt.Controllers
 
         public ActionResult Details(int? id)
         {
+            var ctx = new CovidHospitalDBContext();
             CovidHospital c = null;
             if (id != null)
             {
@@ -58,15 +62,5 @@ namespace CovidHospitalsMgmt.Controllers
             
             return View();
         }
-
-
-
-
-
-
-
-
-
-
     }
 }
