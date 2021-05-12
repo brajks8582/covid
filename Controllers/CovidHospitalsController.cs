@@ -1,3 +1,4 @@
+using CovidHospitalsMgmt.CustomFilters;
 using CovidHospitalsMgmt.Data;
 using CovidHospitalsMgmt.Models;
 using System;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace CovidHospitalsMgmt.Controllers
 {
+    [CustomExceptionFilterAttribute]
     public class CovidHospitalsController : Controller
     {
         public CovidHospitalDBContext ctx = new CovidHospitalDBContext();
@@ -31,11 +33,11 @@ namespace CovidHospitalsMgmt.Controllers
                 {
                     ctx.CovidHospitals.Add(covidHospital);
                     ctx.SaveChanges();
-                    return RedirectToAction("Details",covidHospital);
+                    return RedirectToAction("Details",new { id = covidHospital.HospitalID});
                 }
                 else
                 {
-                    return View("error");
+                    return View(covidHospital);
                 }
 
             }
@@ -45,11 +47,16 @@ namespace CovidHospitalsMgmt.Controllers
             }
         }
 
-        public ActionResult Details(CovidHospital covidHospital)
+        public ActionResult Details(int? id)
         {
-
+            CovidHospital c = null;
+            if (id != null)
+            {
+                c = ctx.CovidHospitals.Where(model => model.HospitalID == id).FirstOrDefault();
+                return View(c);
+            }
             
-            return View(covidHospital);
+            return View();
         }
 
 
