@@ -1,0 +1,30 @@
+﻿@model List<CovidHospitalsMgmt.Models.CovidHospital>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            <h1>Covid Hospitals List</h1>
+        </th>
+        
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.HospitalName)</td>
+            <td>@Html.DisplayFor(modelitem => item.City)</td>
+            <td>@Html.DisplayFor(modelitem => item.StartDate)</td>
+            <td>@Html.DisplayFor(modelitem => item.OnlineRegistrations)</td>
+            <td>@Html.DisplayFor(modelitem => item.Beds)</td>
+        </tr>
+}
+</table>
